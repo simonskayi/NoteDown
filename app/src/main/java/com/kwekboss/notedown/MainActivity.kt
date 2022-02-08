@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerview  = findViewById<RecyclerView>(R.id.recycler_view)
         val newNote = findViewById<FloatingActionButton>(R.id.fab_new_note)
         // Creating an instance of the viewModel
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[NoteDownViewModel::class.java]
 
         // Handling the recyclerview

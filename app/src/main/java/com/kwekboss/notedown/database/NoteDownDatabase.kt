@@ -16,15 +16,19 @@ abstract class NoteDownDatabase(): RoomDatabase() {
         @Volatile
         private var INSTANCE:NoteDownDatabase?=null
         fun getDatabase(context: Context):NoteDownDatabase{
-           return INSTANCE?: synchronized(this){
-            val instance = Room.databaseBuilder(
-                context.applicationContext,NoteDownDatabase::class.java,
-                "note_dataBase"
-            ).build()
-            INSTANCE = instance
-            instance
-        }
-
+            val tempInstance = INSTANCE
+            if (tempInstance!=null){
+                return tempInstance
+            }
+            synchronized(this){
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    NoteDownDatabase::class.java,
+                    "note_dataBase"
+                ).build()
+                INSTANCE=instance
+                return instance
+            }
+           }
     }
-}
 }

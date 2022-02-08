@@ -15,8 +15,7 @@ class NoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
          // Finding views by their IDs
-        val noteHead = findViewById<EditText>(R.id.edtv_note_head).text.toString()
-        val noteBody = findViewById<EditText>(R.id.edtv_note_body).text.toString()
+
         val saveNote = findViewById<FloatingActionButton>(R.id.fab_save_note)
         //Creating a viewModel instance
         viewModel = ViewModelProvider(
@@ -27,7 +26,8 @@ class NoteActivity : AppCompatActivity() {
         //Wiring the Save Button to (save notes)
 
         saveNote.setOnClickListener {
-
+            val noteHead = findViewById<EditText>(R.id.edtv_note_head).text.toString()
+            val noteBody = findViewById<EditText>(R.id.edtv_note_body).text.toString()
             // To Check if the user has typed some notes.
             if (noteHead.isNotEmpty() && noteBody.isNotEmpty()) {
                 viewModel.addNote(Note(0, noteHead, noteBody))
