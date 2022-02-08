@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Note Down</string>
+    <string name="speak_1"> add note</string>
+    <string name="speak_2"> save note</string>
+    <string name="note_tittle_hint">Note Tittle Here</string>
+    <string name="note_content_hint">Start Note Here</string>
+    <string name="delete_icon">to delete item</string>
+    <string name="toast_messg_error">No Note To Save, Create One.</string>
+    <string name="toast_messg_sucess">Note Has Been Saved</string>
+
+</resources>
