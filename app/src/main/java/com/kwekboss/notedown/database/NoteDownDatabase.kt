@@ -19,7 +19,7 @@ abstract class NoteDownDatabase(): RoomDatabase() {
            return INSTANCE?: synchronized(this){
             val instance = Room.databaseBuilder(
                 context.applicationContext,NoteDownDatabase::class.java,
-                "Note_Down_DataBase"
+                "note_dataBase"
             ).build()
             INSTANCE = instance
             instance

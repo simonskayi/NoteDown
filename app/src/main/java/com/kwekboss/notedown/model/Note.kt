@@ -3,7 +3,7 @@ package com.kwekboss.notedown.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Note_Down_DataBase")
+@Entity(tableName = "note_dataBase")
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
