@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kwekboss.notedown.model.Note
 import com.kwekboss.notedown.viewmodel.NoteDownViewModel
+import java.text.DateFormat
+import java.util.*
 
 class NoteActivity : AppCompatActivity() {
     private lateinit var viewModel: NoteDownViewModel
@@ -23,14 +25,17 @@ class NoteActivity : AppCompatActivity() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[NoteDownViewModel::class.java]
 
-        //Wiring the Save Button to (save notes)
+        // Generating Date And Time
+        val calender=Calendar.getInstance()
+        val simpleDateFormat = DateFormat.getDateInstance(DateFormat.SHORT).format(calender.time)
 
+        //Wiring the Save Button to (save notes)
         saveNote.setOnClickListener {
             val noteHead = findViewById<EditText>(R.id.edtv_note_head).text.toString()
             val noteBody = findViewById<EditText>(R.id.edtv_note_body).text.toString()
             // To Check if the user has typed some notes.
             if (noteHead.isNotEmpty() && noteBody.isNotEmpty()) {
-                viewModel.addNote(Note(0, noteHead, noteBody))
+                viewModel.addNote(Note(0, noteHead, noteBody,simpleDateFormat))
                 Toast.makeText(this, R.string.toast_messg_sucess, Toast.LENGTH_SHORT).show()
                 finish()
             } else {

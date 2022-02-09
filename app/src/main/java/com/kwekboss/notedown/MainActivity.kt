@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kwekboss.notedown.recyclerview.NoteAdapter
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // Handling the recyclerview
         val adapter = NoteAdapter()
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             recyclerview.adapter = adapter
 
       // Calling all saved notes from the database to the recyclerView
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
           adapter.notifyItemChanged(it.size-1)
 
       }
-
         // this will start the next activity
         newNote.setOnClickListener {
             val intent = Intent(this, NoteActivity::class.java)
