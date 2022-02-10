@@ -2,6 +2,8 @@ package com.kwekboss.notedown.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface NoteDao {
@@ -17,4 +19,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_dataBase")
     fun allNotes():LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_dataBase WHERE tittle LIKE :searchQuery")
+    fun searchQuery(searchQuery: String): Flow<List<Note>>
 }

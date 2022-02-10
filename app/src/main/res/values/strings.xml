@@ -9,5 +9,6 @@
     <string name="toast_messg_sucess">Note Has Been Saved</string>
     <string name="my_note">NOTES</string>
     <string name="Date_Created">April 01, 2022</string>
+    <string name="search">Enter search tittle</string>
 
 </resources>

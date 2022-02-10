@@ -7,13 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mycolor">#3B403C3C</color>
 
     <!-- These colors will be used for cardView Background-->
-    <color name="color_1">#DC8C17</color>
-    <color name="color_2">#C6275D</color>
-    <color name="color_3">#3F51B5</color>
-    <color name="color_4">#A228B6</color>
-    <color name="color_5">#20B892</color>
-    <color name="color_6">#8BC34A</color>
-    <color name="color_7">#BF441D</color>
+    <color name="color_1">#FFB74D</color>
+    <color name="color_2">#F06292</color>
+    <color name="color_3">#7986CB</color>
+    <color name="color_4">#9575CD</color>
+    <color name="color_5">#428A78</color>
+    <color name="color_6">#AED581</color>
+    <color name="color_7">#E57373</color>
 </resources>

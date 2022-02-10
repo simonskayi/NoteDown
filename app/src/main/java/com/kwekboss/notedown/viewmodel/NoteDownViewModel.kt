@@ -3,6 +3,7 @@ package com.kwekboss.notedown.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kwekboss.notedown.database.NoteDownDatabase
 import com.kwekboss.notedown.model.Note
@@ -35,9 +36,13 @@ class NoteDownViewModel(application: Application):AndroidViewModel(application){
     fun updateNote(note: Note){
         viewModelScope.launch(Dispatchers.IO) {
             viewModelScope.launch {
-                repository.deleteNote(note)
+                repository.updateNote(note)
             }
         }
+    }
+
+    fun databaseSearch(searchQuery:String):LiveData<List<Note>>{
+        return repository.searchDatabase(searchQuery).asLiveData()
     }
 }
 
