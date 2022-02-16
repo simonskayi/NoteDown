@@ -9,11 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.kwekboss.notedown.model.Note
 import com.kwekboss.notedown.recyclerview.NoteAdapter
 
 import com.kwekboss.notedown.viewmodel.NoteDownViewModel
 
-class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener,
+    NoteAdapter.OnClickDeleteNote, NoteAdapter.OnclickUpdateNote {
 
     private lateinit var viewModel: NoteDownViewModel
 lateinit var adapter:NoteAdapter
@@ -29,7 +31,7 @@ lateinit var adapter:NoteAdapter
         )[NoteDownViewModel::class.java]
 
         // Handling the recyclerview
-       adapter = NoteAdapter()
+       adapter = NoteAdapter(this,this)
         recyclerview.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             recyclerview.adapter = adapter
 
@@ -71,4 +73,18 @@ private fun searchData(search:String){
         adapter.notifyDataSetChanged()
     }
 }
+
+    override fun onDeleteNote(note: Note) {
+        viewModel.deleteNote(note)
+    }
+
+    override fun updateNote(note: Note) {
+        val intent = Intent(this, NoteActivity::class.java)
+        intent.putExtra("inputTYpe","dataAvailable")
+        intent.putExtra("noteId",note.id)
+        intent.putExtra("noteTittle",note.tittle)
+        intent.putExtra("noteBody",note.noteBody)
+        startActivity(intent)
+
+    }
 }
