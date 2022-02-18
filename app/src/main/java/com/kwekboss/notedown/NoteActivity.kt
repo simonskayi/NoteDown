@@ -29,13 +29,13 @@ class NoteActivity : AppCompatActivity() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[NoteDownViewModel::class.java]
 
-        // Generating Date
+        // Generating Date for when Note was created
         val calender=Calendar.getInstance()
         val simpleDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calender.time)
 
-        val imputType= intent.getStringExtra("inputTYpe")
+        val inputType= intent.getStringExtra("inputTYpe")
 
-        if (imputType=="dataAvailable"){
+        if (inputType=="dataAvailable"){
              val noteHead= intent.getStringExtra("noteTittle")
             val noteBody = intent.getStringExtra("noteBody")
             edtxtNoteHead.setText(noteHead)
@@ -48,14 +48,15 @@ class NoteActivity : AppCompatActivity() {
             val noteHeader = edtxtNoteHead.text.toString()
              val noteDescription =edtxtnoteBody.text.toString()
 
-            if (imputType== "dataAvailable"){
+            if (inputType== "dataAvailable"){
                 val oldNoteId = intent.getIntExtra("noteId",-1)
                 if (noteHeader.isNotEmpty() && noteDescription.isNotEmpty()){
                     viewModel.updateNote(Note(oldNoteId,noteHeader,noteDescription,simpleDateFormat))
+                    Toast.makeText(this, R.string.note_update, Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
-            // To Check if the user has typed some notes.
+            // To Check if the user has Note.
             else if (noteHeader.isNotEmpty() && noteDescription.isNotEmpty()) {
                 viewModel.addNote(Note(0, noteHeader, noteDescription,simpleDateFormat))
                 Toast.makeText(this, R.string.toast_messg_sucess, Toast.LENGTH_SHORT).show()
