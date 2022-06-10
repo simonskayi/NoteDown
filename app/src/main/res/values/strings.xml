@@ -2,12 +2,12 @@
     <string name="app_name">Note Down</string>
     <string name="speak_1"> add note</string>
     <string name="speak_2"> save note</string>
-    <string name="note_tittle_hint">Note tittle </string>
-    <string name="note_content_hint"> Notes Here</string>
+    <string name="note_tittle_hint">Title</string>
+    <string name="note_content_hint">New Note</string>
     <string name="delete_note">Deleted Successfully</string>
     <string name="note_update">Note Updated</string>
-    <string name="toast_messg_error">Note must have a tittle and a body</string>
-    <string name="toast_messg_sucess">Note Has Been Saved</string>
+    <string name="toast_messg_error">Note must have a head and a body</string>
+    <string name="toast_messg_sucess">Note Saved</string>
     <string name="my_note">NOTES</string>
     <string name="Date_Created">April 01, 2022</string>
     <string name="search">Search here</string>

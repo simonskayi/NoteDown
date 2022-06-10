@@ -40,8 +40,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
 
         // Calling all saved notes from the database to the recyclerView
         viewModel.getAllNote.observe(this) {
-            adapter.displayList(it)
-            adapter.notifyItemChanged(it.size - 1)
+            adapter.differ.submitList(it)
 
         }
         // this will start the next activity
@@ -68,12 +67,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
         return true
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private fun searchData(search: String) {
         val searchQuery = "%$search%"
         viewModel.databaseSearch(searchQuery).observe(this) {
-            adapter.displayList(it)
-            adapter.notifyDataSetChanged()
+            adapter.differ.submitList(it)
         }
     }
 
@@ -86,7 +84,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
     // This function sends data to the next activity
     override fun updateNote(note: Note) {
         val intent = Intent(this, NoteActivity::class.java)
-        intent.putExtra("inputTYpe", "dataAvailable")
+        intent.putExtra("inputTYpe", "DataIsAvailable")
         intent.putExtra("noteId", note.id)
         intent.putExtra("noteTittle", note.tittle)
         intent.putExtra("noteBody", note.noteBody)

@@ -7,13 +7,29 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kwekboss.notedown.R
 import com.kwekboss.notedown.model.Note
 
-class NoteAdapter(private val onClickDeleteNote: OnClickDeleteNote, private val onclickUpdateNote: OnclickUpdateNote):RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+class NoteAdapter(
+    private val onClickDeleteNote: OnClickDeleteNote,
+    private val onclickUpdateNote: OnclickUpdateNote
+) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
-    val myNotes = ArrayList<Note>()
+
+    private val diffCallback = object : DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout =
@@ -24,7 +40,7 @@ class NoteAdapter(private val onClickDeleteNote: OnClickDeleteNote, private val 
     // this code will randomly create background colors for the cardview //
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(myNotes[position])
+        holder.bindView(differ.currentList[position])
 
         // creating  a reference of colors
         val color = ArrayList<Int>()
@@ -41,7 +57,7 @@ class NoteAdapter(private val onClickDeleteNote: OnClickDeleteNote, private val 
     }
 
     override fun getItemCount(): Int {
-        return myNotes.size
+        return differ.currentList.size
     }
 
     inner class ViewHolder(
@@ -53,12 +69,11 @@ class NoteAdapter(private val onClickDeleteNote: OnClickDeleteNote, private val 
 
         init {
             itemView.setOnClickListener {
-                onclickUpdateNote.updateNote(myNotes[absoluteAdapterPosition])
+                onclickUpdateNote.updateNote(differ.currentList[absoluteAdapterPosition])
             }
             itemView.setOnLongClickListener {
-                onClickDeleteNote.onDeleteNote(myNotes[absoluteAdapterPosition])
-                myNotes.removeAt(absoluteAdapterPosition)
-                notifyItemRemoved(absoluteAdapterPosition)
+                onClickDeleteNote.onDeleteNote(differ.currentList[absoluteAdapterPosition])
+
                 return@setOnLongClickListener true
             }
         }
@@ -70,13 +85,6 @@ class NoteAdapter(private val onClickDeleteNote: OnClickDeleteNote, private val 
             date.text = note.date
         }
     }
-
-    // this function will populate saved notes to the recyclerview
-    fun displayList(note: List<Note>) {
-        myNotes.clear()
-        myNotes.addAll(note)
-    }
-
 
     interface OnClickDeleteNote {
         fun onDeleteNote(note: Note) {
