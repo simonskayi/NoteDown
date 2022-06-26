@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mycolor">#3B403C3C</color>
 
+
     <!-- These colors will be used for cardView Background-->
     <color name="color_1">#FFB74D</color>
     <color name="color_2">#F06292</color>
@@ -17,4 +18,9 @@
     <color name="color_5">#428A78</color>
     <color name="color_6">#AED581</color>
     <color name="color_7">#E57373</color>
+
+    <!-- These colors are for custom dialog-->
+    <color name="red">#EBCC1616</color>
+
+
 </resources>

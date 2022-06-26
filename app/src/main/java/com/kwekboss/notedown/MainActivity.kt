@@ -1,10 +1,13 @@
 package com.kwekboss.notedown
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -77,8 +80,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
 
     // this deletes a note from the database from a longClick
     override fun onDeleteNote(note: Note) {
-        viewModel.deleteNote(note)
-        Toast.makeText(this, R.string.delete_note, Toast.LENGTH_SHORT).show()
+        deleteNoteDialog(this,note)
+
     }
 
     // This function sends data to the next activity
@@ -89,6 +92,30 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
         intent.putExtra("noteTittle", note.tittle)
         intent.putExtra("noteBody", note.noteBody)
         startActivity(intent)
+
+    }
+
+
+    private fun deleteNoteDialog(context:Context, note: Note){
+        val dialog = Dialog(context)
+        dialog.apply {
+            setCancelable(false)
+            setContentView(R.layout.custom_dialog_layout)
+
+            val dialogYes = dialog.findViewById<TextView>(R.id.txt_yes)
+            val dialogNo  = dialog.findViewById<TextView>(R.id.txt_no)
+
+            dialogYes.setOnClickListener {
+               viewModel.deleteNote(note)
+                dialog.dismiss()
+                Toast.makeText(this@MainActivity, R.string.delete_note, Toast.LENGTH_SHORT).show()
+            }
+
+            dialogNo.setOnClickListener {
+                dialog.dismiss()
+                Toast.makeText(this@MainActivity, R.string.no_deletion, Toast.LENGTH_SHORT).show()
+            }
+        }.show()
 
     }
 }

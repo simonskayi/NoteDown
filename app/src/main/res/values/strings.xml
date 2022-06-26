@@ -9,7 +9,12 @@
     <string name="toast_messg_error">Note must have a head and a body</string>
     <string name="toast_messg_sucess">Note Saved</string>
     <string name="my_note">NOTES</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Are you sure you want to permanently delete the selected Note?</string>
+    <string name="dialog_Yes">Yes</string>
+    <string name="dialog_No">No</string>
     <string name="Date_Created">April 01, 2022</string>
     <string name="search">Search here</string>
+    <string name="no_deletion">No Deletion Occurred</string>
 
 </resources>
