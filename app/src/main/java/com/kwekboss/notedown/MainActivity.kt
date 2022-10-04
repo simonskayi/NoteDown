@@ -1,6 +1,5 @@
 package com.kwekboss.notedown
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -19,10 +18,10 @@ import com.kwekboss.notedown.recyclerview.NoteAdapter
 import com.kwekboss.notedown.viewmodel.NoteDownViewModel
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
-    NoteAdapter.OnClickDeleteNote, NoteAdapter.OnclickUpdateNote {
+    NoteAdapter.NoteAdapterInterface {
 
     private lateinit var viewModel: NoteDownViewModel
-    lateinit var adapter: NoteAdapter
+    private lateinit var adapter: NoteAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
         )[NoteDownViewModel::class.java]
 
         // Handling the recyclerview
-        adapter = NoteAdapter(this, this)
+        adapter = NoteAdapter(this)
         recyclerview.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerview.adapter = adapter

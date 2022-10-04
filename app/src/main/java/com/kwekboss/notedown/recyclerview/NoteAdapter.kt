@@ -14,8 +14,7 @@ import com.kwekboss.notedown.R
 import com.kwekboss.notedown.model.Note
 
 class NoteAdapter(
-    private val onClickDeleteNote: OnClickDeleteNote,
-    private val onclickUpdateNote: OnclickUpdateNote
+    private val noteAdapterInterface: NoteAdapterInterface,
 ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
 
@@ -34,7 +33,7 @@ class NoteAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout =
             LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_layout, parent, false)
-        return ViewHolder(layout, onClickDeleteNote, onclickUpdateNote)
+        return ViewHolder(layout, noteAdapterInterface)
     }
 
     // this code will randomly create background colors for the cardview //
@@ -62,17 +61,16 @@ class NoteAdapter(
 
     inner class ViewHolder(
         itemView: View,
-        onClickDeleteNote: OnClickDeleteNote,
-        onclickUpdateNote: OnclickUpdateNote
+        noteInterface: NoteAdapterInterface,
     ) : RecyclerView.ViewHolder(itemView) {
         val cardview = itemView.findViewById<CardView>(R.id.cardview)
 
         init {
             itemView.setOnClickListener {
-                onclickUpdateNote.updateNote(differ.currentList[absoluteAdapterPosition])
+                noteInterface.updateNote(differ.currentList[absoluteAdapterPosition])
             }
             itemView.setOnLongClickListener {
-                onClickDeleteNote.onDeleteNote(differ.currentList[absoluteAdapterPosition])
+                noteInterface.onDeleteNote(differ.currentList[absoluteAdapterPosition])
 
                 return@setOnLongClickListener true
             }
@@ -86,17 +84,10 @@ class NoteAdapter(
         }
     }
 
-    interface OnClickDeleteNote {
-        fun onDeleteNote(note: Note) {
+    interface NoteAdapterInterface {
+        fun onDeleteNote(note: Note)
+        fun updateNote(note: Note)
 
-        }
     }
-
-    interface OnclickUpdateNote {
-        fun updateNote(note: Note) {
-
-        }
-    }
-
 
 }
