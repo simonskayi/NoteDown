@@ -33,9 +33,9 @@ import java.util.*
         val calender = Calendar.getInstance()
         val simpleDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calender.time)
 
-        val inputType = intent.getStringExtra("inputTYpe")
+        val dataPassed = intent.getStringExtra("updateInput")
 
-        if (inputType == "DataIsAvailable") {
+        if (dataPassed == "DataIsAvailable") {
             val noteHead = intent.getStringExtra("noteTittle")
             val noteBody = intent.getStringExtra("noteBody")
             edtxtNoteHead.setText(noteHead)
@@ -48,7 +48,7 @@ import java.util.*
             val noteDescription = edtxtnoteBody.text.toString()
 
             //Updating a Note
-            if (inputType == "DataIsAvailable") {
+            if (dataPassed == "DataIsAvailable") {
                 val oldNoteId = intent.getIntExtra("noteId", -1)
                 if (noteHeader.isNotEmpty() && noteDescription.isNotEmpty()) {
                     viewModel.updateNote(

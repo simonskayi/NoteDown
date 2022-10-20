@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
     // This function sends data to the next activity
     override fun updateNote(note: Note) {
         val intent = Intent(this, NoteActivity::class.java)
-        intent.putExtra("inputTYpe", "DataIsAvailable")
+        intent.putExtra("updateInput", "DataIsAvailable")
         intent.putExtra("noteId", note.id)
         intent.putExtra("noteTittle", note.tittle)
         intent.putExtra("noteBody", note.noteBody)
