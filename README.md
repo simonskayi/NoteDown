@@ -9,7 +9,7 @@ Welcome to the Android Note Taking Application! This app is designed to help use
 - **Note Editing:** Edit existing notes to update or add additional information.
 - **Note Deletion:** Remove unwanted notes from the list to keep things organized.
 
-## Technologies Used
+## Technologies 
 
 - **Android Room Database:** Efficiently store and retrieve notes.
 - **RecyclerView:** Display a scrollable list of notes for easy navigation.
