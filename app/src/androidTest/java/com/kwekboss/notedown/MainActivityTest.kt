@@ -1,4 +1,5 @@
 package com.kwekboss.notedown
+
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.launchActivity
@@ -23,23 +24,25 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class MainActivityTest {
 
-    private lateinit var mainActivity:ActivityScenario<MainActivity>
-  @Before
+    private lateinit var mainActivity: ActivityScenario<MainActivity>
+
+    @Before
     fun setUp() {
         mainActivity = launchActivity()
-       mainActivity.moveToState(Lifecycle.State.RESUMED)
+        mainActivity.moveToState(Lifecycle.State.RESUMED)
     }
 
     @Test
-    fun testApplicationIsWorkingAsExpected(){
-    onView(withId(R.id.fab_new_note)).perform(click())
+    fun testApplicationIsWorkingAsExpected() {
         val title = "Expresso Test"
         val body = "Test Case Passed.Great News!"
+
+        onView(withId(R.id.fab_new_note)).perform(click())
 
         onView(withId(R.id.edtv_note_head)).perform(ViewActions.typeText(title))
         Espresso.closeSoftKeyboard()
 
-       onView(withId(R.id.edtv_note_body)).perform(ViewActions.typeText(body))
+        onView(withId(R.id.edtv_note_body)).perform(ViewActions.typeText(body))
         Espresso.closeSoftKeyboard()
 
         onView(withId(R.id.fab_save_note)).perform(click())
@@ -50,6 +53,6 @@ internal class MainActivityTest {
         onView(withText(R.id.textView)).check(matches(isDisplayed()))
 
 
-       // onView(wi("Note")).check(matches(isDisplayed()))
+        // onView(wi("Note")).check(matches(isDisplayed()))
     }
 }

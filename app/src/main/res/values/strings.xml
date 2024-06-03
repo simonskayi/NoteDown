@@ -2,11 +2,11 @@
     <string name="app_name">Note Down</string>
     <string name="speak_1"> add note</string>
     <string name="speak_2"> save note</string>
-    <string name="note_tittle_hint">Heading</string>
-    <string name="note_content_hint">Start Here</string>
+    <string name="note_tittle_hint">Enter title here…</string>
+    <string name="note_content_hint">Start typing here…</string>
     <string name="delete_note">Deleted Successfully</string>
-    <string name="note_update">Note Updated</string>
-    <string name="toast_messg_error">No heading and a body Provided</string>
+    <string name="note_update">Note Updated Successfully</string>
+    <string name="toast_messg_error">Sorry title or body cannot be empty</string>
     <string name="toast_messg_sucess">Note Saved</string>
     <string name="my_note">NOTES</string>
     <string name="dialog_delete_title">Delete</string>
@@ -15,6 +15,6 @@
     <string name="dialog_No">No</string>
     <string name="Date_Created">April 01, 2022</string>
     <string name="search">Search here</string>
-    <string name="no_deletion">No Deletion Occurred</string>
+    <string name="no_deletion">Noting Got Deleted</string>
 
 </resources>

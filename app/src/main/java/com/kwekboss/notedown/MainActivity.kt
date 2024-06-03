@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kwekboss.notedown.model.Note
 import com.kwekboss.notedown.recyclerview.NoteAdapter
+import com.kwekboss.notedown.utils.Constant
 
 import com.kwekboss.notedown.viewmodel.NoteDownViewModel
 
@@ -84,12 +85,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
     }
 
     // This function sends data to the next activity
-    override fun updateNote(note: Note) {
+    override fun viewOrUpadateNote(note: Note) {
         val intent = Intent(this, NoteActivity::class.java)
-        intent.putExtra("updateInput", "DataIsAvailable")
-        intent.putExtra("noteId", note.id)
-        intent.putExtra("noteTittle", note.tittle)
-        intent.putExtra("noteBody", note.noteBody)
+        intent.putExtra(Constant.viewNoteKey, Constant.dataTransfered)
+        intent.putExtra(Constant.noteIdKey, note.id)
+        intent.putExtra(Constant.noteTitleKey, note.tittle)
+        intent.putExtra(Constant.noteBodyKey, note.noteBody)
         startActivity(intent)
 
     }

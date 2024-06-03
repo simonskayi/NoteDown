@@ -5,7 +5,7 @@ import com.kwekboss.notedown.model.Note
 import com.kwekboss.notedown.model.NoteDao
 import kotlinx.coroutines.flow.Flow
 
-class Repository(val notes:NoteDao) {
+class Repository(private val notes:NoteDao) {
 
     suspend fun newNote(note:Note){
         notes.insert(note)
@@ -19,7 +19,6 @@ class Repository(val notes:NoteDao) {
         notes.update(note)
     }
     fun getAllNotes():LiveData<List<Note>> = notes.allNotes()
-
 
     fun searchDatabase(searchQuery:String):Flow<List<Note>> = notes.searchQuery(searchQuery)
 
