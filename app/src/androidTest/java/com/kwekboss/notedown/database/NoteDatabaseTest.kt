@@ -16,6 +16,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.Calendar
+import java.util.Date
 
 /*Test to check if NoteDatabase is working as expected
 * This includes the NoteDAO functions
@@ -30,6 +32,7 @@ internal class NoteDatabaseTest : TestCase() {
 
     private lateinit var database: NoteDownDatabase
     private lateinit var noteDao: NoteDao
+    private val calender = Calendar.getInstance().time
 
     @Before
     public override fun setUp() {
@@ -46,7 +49,7 @@ internal class NoteDatabaseTest : TestCase() {
 
     @Test
     fun canWriteToDatabase() = runBlocking {
-        val note = Note(2, "Making A Test", "I think we've Passed the Test", "2020")
+        val note = Note(2, "Making A Test", "I think we've Passed the Test", calender)
         noteDao.insert(note)
         val allNotes = noteDao.allNotes().getOrAwaitValue()
 
@@ -56,11 +59,11 @@ internal class NoteDatabaseTest : TestCase() {
     @Test
     fun ableToDeleteFromDatabase() = runBlocking {
 
-        val note = Note(2, "Test Deletion", "I think we've Passed the Test", "2020")
+        val note = Note(2, "Test Deletion", "I think we've Passed the Test", calender)
         noteDao.insert(note)
 
         val deleteNote = noteDao.allNotes().getOrAwaitValue().find {
-            it.date == "2020"
+            it.date == calender
         }
 
         noteDao.delete(deleteNote!!)
@@ -72,7 +75,7 @@ internal class NoteDatabaseTest : TestCase() {
 
     @Test
     fun ableToUpdateDatabaseNotes() = runBlocking {
-        val note = Note(2, "Update Test", "I think we've Passed the Test", "2020")
+        val note = Note(2, "Update Test", "I think we've Passed the Test", calender)
         noteDao.insert(note)
 
         val findNote = noteDao.allNotes().getOrAwaitValue().find {

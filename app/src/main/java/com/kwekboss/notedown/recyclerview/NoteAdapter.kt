@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kwekboss.notedown.R
 import com.kwekboss.notedown.model.Note
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class NoteAdapter(
     private val noteAdapterInterface: NoteAdapterInterface,
@@ -67,7 +69,7 @@ class NoteAdapter(
 
         init {
             itemView.setOnClickListener {
-                noteInterface.updateNote(differ.currentList[absoluteAdapterPosition])
+                noteInterface.viewOrUpadateNote(differ.currentList[absoluteAdapterPosition])
             }
             itemView.setOnLongClickListener {
                 noteInterface.onDeleteNote(differ.currentList[absoluteAdapterPosition])
@@ -77,16 +79,17 @@ class NoteAdapter(
         }
 
         fun bindView(note: Note) {
+            val dateFormat = SimpleDateFormat("dd MMM yyy", Locale.getDefault())
             val noteHeading = itemView.findViewById<TextView>(R.id.tv_model)
             val date = itemView.findViewById<TextView>(R.id.tv_date)
             noteHeading.text = note.tittle
-            date.text = note.date
+            date.text = dateFormat.format(note.date)
         }
     }
 
     interface NoteAdapterInterface {
         fun onDeleteNote(note: Note)
-        fun updateNote(note: Note)
+        fun viewOrUpadateNote(note: Note)
 
     }
 
